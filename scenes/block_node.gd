@@ -9,6 +9,16 @@ class_name BlockNode extends Area2D
 	set(value):
 		label = value
 		_update_text()
+@export var type: Type:
+	set(value):
+		type = value
+		$OutlineSprite2D.self_modulate = _get_color_for_type(type)
+
+enum Type {
+	BOOL,
+	NUMBER,
+	OBJECT
+}
 
 var connection: BlockNodeConnection
 
@@ -30,3 +40,9 @@ func _update_alignment():
 func _update_text():
 	if !has_node("MarginContainer/Label"): return
 	$MarginContainer/Label.text = label
+
+func _get_color_for_type(type: Type):
+	if type == Type.BOOL: return Color.RED
+	if type == Type.NUMBER: return Color.GREEN
+	if type == Type.OBJECT: return Color.PURPLE
+	return Color.DIM_GRAY

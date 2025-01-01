@@ -33,7 +33,7 @@ func _physics_process(_delta):
 		hovered_item = item
 	elif state == State.MOVING_BLOCK:
 		hovered_item = null
-	elif state == State.CREATING_CONNECTION and item is BlockNode and item != starting_block_node:
+	elif state == State.CREATING_CONNECTION and item is BlockNode and connection_being_created.can_connect(item):
 		hovered_item = item
 
 func _input(event: InputEvent):
@@ -44,16 +44,14 @@ func _input(event: InputEvent):
 		elif hovered_item is BlockNode:
 			state = State.CREATING_CONNECTION
 			if is_instance_valid(hovered_item.connection): hovered_item.connection.queue_free()
-			starting_block_node = hovered_item
-			hovered_item = null
 			connection_being_created = preload("res://scenes/block_node_connection.tscn").instantiate()
 			add_child(connection_being_created)
-			connection_being_created.start = starting_block_node
+			connection_being_created.connect_block_node(hovered_item)
 	elif event.is_action_released("select"):
 		if state == State.CREATING_CONNECTION:
 			if hovered_item != null:
 				if is_instance_valid(hovered_item.connection): hovered_item.connection.queue_free()
-				connection_being_created.end = hovered_item
+				connection_being_created.connect_block_node(hovered_item)
 			else:
 				connection_being_created.queue_free()
 		state = State.IDLE

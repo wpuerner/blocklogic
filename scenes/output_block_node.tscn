@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3870dovlod1a"]
+
+[ext_resource type="PackedScene" uid="uid://b57o4bh6u4xdh" path="res://scenes/block_node.tscn" id="1_7ouge"]
+[ext_resource type="Script" path="res://scenes/output_block_node.gd" id="2_6lnud"]
+[ext_resource type="Shader" path="res://assets/outline.gdshader" id="2_x12u6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if4cq"]
+resource_local_to_scene = true
+shader = ExtResource("2_x12u6")
+shader_parameter/width = 0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[node name="OutputBlockNode" instance=ExtResource("1_7ouge")]
+script = ExtResource("2_6lnud")
+is_left_edge = false
+
+[node name="OutlineSprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_if4cq")
+
+[node name="MarginContainer" parent="." index="2"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -133.0
+offset_right = 0.0
+
+[node name="Label" parent="MarginContainer" index="0"]
+size_flags_horizontal = 8

@@ -1,39 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbk8hm03vvp74"]
+[gd_scene load_steps=5 format=3 uid="uid://bbk8hm03vvp74"]
 
 [ext_resource type="Script" path="res://scenes/block_logic_window.gd" id="1_817wy"]
 [ext_resource type="PackedScene" uid="uid://bqkyxdlrgng1a" path="res://scenes/block.tscn" id="2_rhrek"]
-[ext_resource type="PackedScene" uid="uid://b57o4bh6u4xdh" path="res://scenes/block_node.tscn" id="3_mv7af"]
+[ext_resource type="PackedScene" uid="uid://c3870dovlod1a" path="res://scenes/output_block_node.tscn" id="3_b76jt"]
+[ext_resource type="PackedScene" uid="uid://q1jl8p2yjb0j" path="res://scenes/input_block_node.tscn" id="4_dyx5i"]
 
 [node name="BlockLogicWindow" type="Node2D"]
 script = ExtResource("1_817wy")
 
 [node name="BlueBlock" parent="." instance=ExtResource("2_rhrek")]
-position = Vector2(736, 257)
+position = Vector2(242, 212)
 
-[node name="BlockNode" parent="BlueBlock" instance=ExtResource("3_mv7af")]
-position = Vector2(-49, 0)
-label = "left edge"
+[node name="OutputBlockNode" parent="BlueBlock" instance=ExtResource("3_b76jt")]
+position = Vector2(198, 51)
+label = "Output"
+
+[node name="OutputBlockNode2" parent="BlueBlock" instance=ExtResource("3_b76jt")]
+position = Vector2(198, 96)
+label = "Output"
+type = 1
+
+[node name="OutputBlockNode3" parent="BlueBlock" instance=ExtResource("3_b76jt")]
+position = Vector2(199, 140)
+label = "Output"
+type = 2
 
 [node name="BlueBlock2" parent="." instance=ExtResource("2_rhrek")]
-position = Vector2(773, 434)
+position = Vector2(744, 264)
 
-[node name="BlockNode" parent="BlueBlock2" instance=ExtResource("3_mv7af")]
-position = Vector2(-49, 0)
-is_left_edge = false
-label = "This is now working finally"
+[node name="InputBlockNode" parent="BlueBlock2" instance=ExtResource("4_dyx5i")]
+position = Vector2(1, 58)
 
-[node name="RedBlock" parent="." instance=ExtResource("2_rhrek")]
-position = Vector2(343, 257)
+[node name="InputBlockNode2" parent="BlueBlock2" instance=ExtResource("4_dyx5i")]
+position = Vector2(1, 100)
+type = 1
 
-[node name="BlockNode" parent="RedBlock" instance=ExtResource("3_mv7af")]
-position = Vector2(49, -1)
-is_left_edge = false
-label = "Something interesting"
-
-[node name="RedBlock2" parent="." instance=ExtResource("2_rhrek")]
-position = Vector2(343, 441)
-
-[node name="BlockNode" parent="RedBlock2" instance=ExtResource("3_mv7af")]
-position = Vector2(49, -1)
-is_left_edge = false
-label = "Something really interesting"
+[node name="InputBlockNode3" parent="BlueBlock2" instance=ExtResource("4_dyx5i")]
+position = Vector2(1, 143)
+type = 2

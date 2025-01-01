@@ -1,26 +1,55 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqkyxdlrgng1a"]
 
 [ext_resource type="Script" path="res://scenes/block.gd" id="1_6xkx2"]
-[ext_resource type="PackedScene" uid="uid://rv2edgftmm8j" path="res://scenes/common/outline_sprite_2d.tscn" id="2_48wx8"]
-[ext_resource type="Shader" path="res://assets/outline.gdshader" id="3_hvfrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_isbqh"]
-size = Vector2(128, 128)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0p0l4"]
 resource_local_to_scene = true
-shader = ExtResource("3_hvfrm")
-shader_parameter/width = 0
-shader_parameter/outline_color = Color(1, 1, 1, 1)
+size = Vector2(200, 200)
+
+[sub_resource type="Theme" id="Theme_tupse"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvd2q"]
+resource_local_to_scene = true
+bg_color = Color(0.194349, 0.194349, 0.194349, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_yemtj"]
 
 [node name="Block" type="Area2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_6xkx2")
+width = 200
+height = 200
+label = "Lorem Ipsum"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(100, 100)
 shape = SubResource("RectangleShape2D_isbqh")
 
-[node name="OutlineSprite2D" parent="." instance=ExtResource("2_48wx8")]
-material = SubResource("ShaderMaterial_0p0l4")
+[node name="Panel" type="Panel" parent="."]
+offset_right = 200.0
+offset_bottom = 200.0
+theme = SubResource("Theme_tupse")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wvd2q")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.5
+offset_right = 51.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Lorem Ipsum"
+label_settings = SubResource("LabelSettings_yemtj")

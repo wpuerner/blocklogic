@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://q1jl8p2yjb0j"]
+
+[ext_resource type="PackedScene" uid="uid://b57o4bh6u4xdh" path="res://scenes/block_node.tscn" id="1_8fchq"]
+[ext_resource type="Script" path="res://scenes/input_block_node.gd" id="2_dj15c"]
+[ext_resource type="Shader" path="res://assets/outline.gdshader" id="2_y183s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if4cq"]
+resource_local_to_scene = true
+shader = ExtResource("2_y183s")
+shader_parameter/width = 0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[node name="InputBlockNode" instance=ExtResource("1_8fchq")]
+script = ExtResource("2_dj15c")
+label = "Input"
+
+[node name="OutlineSprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_if4cq")
+
+[node name="MarginContainer" parent="." index="2"]
+offset_right = 72.0
+
+[node name="Label" parent="MarginContainer" index="0"]
+text = "Input"
