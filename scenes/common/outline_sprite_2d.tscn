@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://rv2edgftmm8j"]
+
+[ext_resource type="Shader" path="res://assets/outline.gdshader" id="1_4opsj"]
+[ext_resource type="Texture2D" uid="uid://bon5qe5sxiy2m" path="res://assets/white_square_with_transparent_edges.png" id="2_1vxy1"]
+[ext_resource type="Script" path="res://scenes/common/outline_sprite_2d.gd" id="3_obql4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qlefs"]
+resource_local_to_scene = true
+shader = ExtResource("1_4opsj")
+shader_parameter/width = 0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[node name="OutlineSprite2D" type="Sprite2D"]
+self_modulate = Color(0, 0, 1, 1)
+material = SubResource("ShaderMaterial_qlefs")
+texture = ExtResource("2_1vxy1")
+script = ExtResource("3_obql4")

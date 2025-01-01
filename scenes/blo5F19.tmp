@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://b57o4bh6u4xdh"]
+
+[ext_resource type="Script" path="res://scenes/block_node.gd" id="1_8o4wq"]
+[ext_resource type="PackedScene" uid="uid://rv2edgftmm8j" path="res://scenes/common/outline_sprite_2d.tscn" id="2_tpimw"]
+[ext_resource type="Shader" path="res://assets/outline.gdshader" id="3_4rbix"]
+[ext_resource type="Texture2D" uid="uid://cpty05s3rc0p4" path="res://assets/small_white_circle_with_transparent_edges.png" id="3_tf8re"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgbnv"]
+radius = 12.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if4cq"]
+resource_local_to_scene = true
+shader = ExtResource("3_4rbix")
+shader_parameter/width = 0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[node name="BlockNode" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_8o4wq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cgbnv")
+
+[node name="OutlineSprite2D" parent="." instance=ExtResource("2_tpimw")]
+self_modulate = Color(1, 0, 0, 1)
+material = SubResource("ShaderMaterial_if4cq")
+texture = ExtResource("3_tf8re")

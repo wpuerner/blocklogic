@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbk8hm03vvp74"]
+
+[ext_resource type="Script" path="res://scenes/block_logic_window.gd" id="1_817wy"]
+[ext_resource type="PackedScene" uid="uid://bqkyxdlrgng1a" path="res://scenes/block.tscn" id="2_rhrek"]
+[ext_resource type="PackedScene" uid="uid://b57o4bh6u4xdh" path="res://scenes/block_node.tscn" id="3_mv7af"]
+
+[node name="BlockLogicWindow" type="Node2D"]
+script = ExtResource("1_817wy")
+
+[node name="BlueBlock" parent="." instance=ExtResource("2_rhrek")]
+position = Vector2(736, 257)
+
+[node name="BlockNode" parent="BlueBlock" instance=ExtResource("3_mv7af")]
+position = Vector2(-49, 0)
+
+[node name="RedBlock" parent="." instance=ExtResource("2_rhrek")]
+position = Vector2(343, 257)
+
+[node name="BlockNode" parent="RedBlock" instance=ExtResource("3_mv7af")]
+position = Vector2(49, -1)
