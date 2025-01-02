@@ -1,7 +1,7 @@
 @tool
 class_name OutputBlockNode extends BlockNode
 
-signal data_was_output(data)
+signal data_transmitted(data)
 
 func output(data):
-	data_was_output.emit(data)
+	data_transmitted.emit(data)

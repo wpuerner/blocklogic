@@ -1,8 +1,15 @@
 @tool
 class_name InputBlockNode extends BlockNode
 
-func connect_output_node(output_node: OutputBlockNode):
-	output_node.data_was_sent.connect(_handle_input)
-	
+signal input_was_received(data)
+
+func add_connection(new_connection: BlockNodeConnection):
+	clear_connections()
+	super(new_connection)
+	new_connection.data_transmitted.connect(_handle_input)
+
+func get_connection():
+	return _get_connections()[0]
+
 func _handle_input(data):
-	pass
+	input_was_received.emit(data)

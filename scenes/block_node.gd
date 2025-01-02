@@ -20,7 +20,17 @@ enum Type {
 	OBJECT
 }
 
-var connection: BlockNodeConnection
+var _connections: Array[BlockNodeConnection]
+
+func add_connection(new_connection: BlockNodeConnection):
+	new_connection.tree_exiting.connect(_handle_connection_exiting_tree.bind(new_connection))
+	_connections.append(new_connection)
+
+func has_connection():
+	return _connections.size() > 0
+	
+func clear_connections():
+	_connections.clear()
 
 func hover():
 	$OutlineSprite2D.show_outline()
@@ -46,3 +56,9 @@ func _get_color_for_type(type: Type):
 	if type == Type.NUMBER: return Color.GREEN
 	if type == Type.OBJECT: return Color.PURPLE
 	return Color.DIM_GRAY
+
+func _get_connections():
+	return _connections
+
+func _handle_connection_exiting_tree(connection: BlockNodeConnection):
+	_connections.erase(connection)

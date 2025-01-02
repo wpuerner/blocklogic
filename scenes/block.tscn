@@ -53,3 +53,4 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Lorem Ipsum"
 label_settings = SubResource("LabelSettings_yemtj")
+horizontal_alignment = 1

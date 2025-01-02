@@ -43,14 +43,14 @@ func _input(event: InputEvent):
 			hovered_item.select()
 		elif hovered_item is BlockNode:
 			state = State.CREATING_CONNECTION
-			if is_instance_valid(hovered_item.connection): hovered_item.connection.queue_free()
+			if hovered_item is InputBlockNode and hovered_item.has_connection(): hovered_item.get_connection().queue_free()
 			connection_being_created = preload("res://scenes/block_node_connection.tscn").instantiate()
 			add_child(connection_being_created)
 			connection_being_created.connect_block_node(hovered_item)
 	elif event.is_action_released("select"):
 		if state == State.CREATING_CONNECTION:
 			if hovered_item != null:
-				if is_instance_valid(hovered_item.connection): hovered_item.connection.queue_free()
+				if hovered_item is InputBlockNode and hovered_item.has_connection(): hovered_item.get_connection().queue_free()
 				connection_being_created.connect_block_node(hovered_item)
 			else:
 				connection_being_created.queue_free()

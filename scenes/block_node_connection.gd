@@ -1,7 +1,9 @@
 class_name BlockNodeConnection extends Node2D
 
-var output_node: BlockNode
-var input_node: BlockNode
+signal data_transmitted(data)
+
+var output_node: OutputBlockNode
+var input_node: InputBlockNode
 var output_node_position: Vector2
 var input_node_position: Vector2
 
@@ -10,7 +12,8 @@ func connect_block_node(block_node: BlockNode):
 		input_node = block_node
 	elif block_node is OutputBlockNode:
 		output_node = block_node
-	block_node.connection = self
+		output_node.data_transmitted.connect(_handle_data_transmission)
+	block_node.add_connection(self)
 	queue_redraw()
 
 func can_connect(block_node: BlockNode):
@@ -41,3 +44,6 @@ func _draw():
 
 func _should_redraw():
 	return (output_node != null and input_node == null) or (output_node != null and output_node.global_position != output_node_position) or (input_node != null and input_node.global_position != input_node_position)
+
+func _handle_data_transmission(data):
+	data_transmitted.emit(data)
