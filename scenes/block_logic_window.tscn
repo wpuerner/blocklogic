@@ -1,94 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbk8hm03vvp74"]
+[gd_scene load_steps=2 format=3 uid="uid://bbk8hm03vvp74"]
 
 [ext_resource type="Script" path="res://scenes/block_logic_window.gd" id="1_817wy"]
-[ext_resource type="PackedScene" uid="uid://bqkyxdlrgng1a" path="res://scenes/block.tscn" id="2_rhrek"]
-[ext_resource type="PackedScene" uid="uid://c3870dovlod1a" path="res://scenes/output_block_node.tscn" id="3_b76jt"]
-[ext_resource type="PackedScene" uid="uid://q1jl8p2yjb0j" path="res://scenes/input_block_node.tscn" id="4_dyx5i"]
-
-[sub_resource type="GDScript" id="GDScript_e8v4g"]
-script/source = "extends Block
-
-@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-
-func _on_timer_timeout():
-	$OutputBlockNode.output(rng.randi_range(0, 9))
-"
-
-[sub_resource type="GDScript" id="GDScript_5u8xy"]
-script/source = "extends Block
-
-func _on_input_block_node_input_was_received(data):
-	$Label.text = str(data)
-"
 
 [node name="BlockLogicWindow" type="Node2D"]
 script = ExtResource("1_817wy")
-
-[node name="RandomIntBlock" parent="." instance=ExtResource("2_rhrek")]
-position = Vector2(242, 212)
-script = SubResource("GDScript_e8v4g")
-height = 100
-label = "Random Int"
-
-[node name="OutputBlockNode" parent="RandomIntBlock" instance=ExtResource("3_b76jt")]
-position = Vector2(198, 51)
-label = "Output"
-type = 1
-
-[node name="Timer" type="Timer" parent="RandomIntBlock"]
-autostart = true
-
-[node name="PrintBlock" parent="." instance=ExtResource("2_rhrek")]
-position = Vector2(655, 121)
-script = SubResource("GDScript_5u8xy")
-label = "Print"
-
-[node name="InputBlockNode" parent="PrintBlock" instance=ExtResource("4_dyx5i")]
-position = Vector2(1, 58)
-type = 1
-
-[node name="Label" type="Label" parent="PrintBlock"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 56.0
-offset_top = 93.0
-offset_right = 146.0
-offset_bottom = 159.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "#"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrintBlock2" parent="." instance=ExtResource("2_rhrek")]
-position = Vector2(654, 380)
-script = SubResource("GDScript_5u8xy")
-label = "Print"
-
-[node name="InputBlockNode" parent="PrintBlock2" instance=ExtResource("4_dyx5i")]
-position = Vector2(1, 58)
-type = 1
-
-[node name="Label" type="Label" parent="PrintBlock2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 56.0
-offset_top = 93.0
-offset_right = 146.0
-offset_bottom = 159.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "#"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -115,7 +30,3 @@ text = "Play"
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 text = "Pause"
-
-[connection signal="timeout" from="RandomIntBlock/Timer" to="RandomIntBlock" method="_on_timer_timeout"]
-[connection signal="input_was_received" from="PrintBlock/InputBlockNode" to="PrintBlock" method="_on_input_block_node_input_was_received"]
-[connection signal="input_was_received" from="PrintBlock2/InputBlockNode" to="PrintBlock2" method="_on_input_block_node_input_was_received"]

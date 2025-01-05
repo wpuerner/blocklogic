@@ -62,3 +62,4 @@ func _get_connections():
 
 func _handle_connection_exiting_tree(connection: BlockNodeConnection):
 	_connections.erase(connection)
+	
